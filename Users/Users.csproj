@@ -54,6 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacilitiesManager.cs">
+      <DependentUpon>FacilitiesManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilitiesManagerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacilitiesManagerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilitiesManagerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacilitiesManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacilitiesManagerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacilitiesManagerModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +110,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EntityDeploy Include="FacilitiesManagerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FacilitiesManagerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="FacilitiesManagerModel.edmx.diagram">
+      <DependentUpon>FacilitiesManagerModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -114,6 +139,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FacilitiesManagerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FacilitiesManagerModel.edmx</DependentUpon>
+      <LastGenOutput>FacilitiesManagerModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="FacilitiesManagerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FacilitiesManagerModel.edmx</DependentUpon>
+      <LastGenOutput>FacilitiesManagerModel.cs</LastGenOutput>
+    </Content>
     <Content Include="UsersEntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UsersEntityModel.Context.cs</LastGenOutput>

@@ -19,7 +19,7 @@ namespace Users
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            button1.Enabled = false;
         }
 
         private void label11_Click(object sender, EventArgs e)
@@ -96,6 +96,35 @@ namespace Users
 
                           if (mfu.SaveChanges() > 0)
                           {
+
+                            userExsists = from u in mfu.Users where u.FirstName == textBox1.Text || u.LastName == textBox2.Text select u;
+                            userExistsCount = userExsists.Count();
+                            List<User> myUser001 = userExsists.ToList();
+
+                            var mUser = from x in mfu.Users where x.FirstName == textBox1.Text || x.LastName == textBox1.Text select x.UserId;
+                            
+                            //int y = myUserID.First();//Convert.ToInt32(myUserID.ToString());
+
+                            FacilitiesManagerEntities fme = new FacilitiesManagerEntities();
+                            int myUserID = mUser.First();//Convert.ToInt32(myUserID.ToString());
+
+                            FacilitiesManager fm = new FacilitiesManager();
+                            fm.FacitlitiesManagerId = myUserID;
+                            fm.OtherSystemRef = textBox10.Text;
+                            fm.Telephone = textBox8.Text;
+                            fm.FMCode = textBox11.Text;                   
+                            fme.FacilitiesManagers.Add(fm);
+                            fme.SaveChanges();
+
+                            var myNewFM = from f in fme.FacilitiesManagers where f.FacitlitiesManagerId == myUserID select f;
+
+                            List<User> myUserX = userExsists.ToList();
+                            dataGridView1.DataSource = myUserX;
+
+                            List < FacilitiesManager >  brandNewFM = myNewFM.ToList();
+                            dataGridView2.DataSource = brandNewFM;
+
+
                               MessageBox.Show(displayText, "USER SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
                           }
                     }
@@ -110,6 +139,9 @@ namespace Users
             } // testing if user exsists
             else
             {
+
+                List < User > myUser = userExsists.ToList();
+                dataGridView1.DataSource = myUser;
                 MessageBox.Show("User already exsists", "ERROR !", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             } //if user exsists i.e the userExsistsCount is 1 or more then display a message
@@ -121,6 +153,23 @@ namespace Users
             }
 
 
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked = true)
+            {
+                button1.Enabled = true;
+                checkBox1.Refresh();
+            
+            }
+
+            if (checkBox1.Checked = false)
+            {
+               button1.Enabled = false;
+
+            }
 
         }
     }
