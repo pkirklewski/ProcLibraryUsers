@@ -53,8 +53,11 @@ namespace Users
         {
 
             MobileFormsEntities mfu = new MobileFormsEntities();
-
+            int userExistsCount;
             var userExsists = from u in mfu.Users where u.FirstName == textBox1.Text || u.LastName == textBox2.Text select u;
+            userExistsCount = userExsists.Count();
+
+
 
             User usr = new User();
 
@@ -70,27 +73,46 @@ namespace Users
             int emptyText;
             emptyText = 0;
 
+
+
+
             if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" || textBox7.Text == "" || textBox8.Text == "" || textBox9.Text == "" || textBox10.Text == "" || textBox11.Text == "")
             {
                 emptyText = 1;
             }
 
-        if (emptyText != 1) {
 
-            try
-            {
-                 mfu.Users.Add(usr);
 
-                  if (mfu.SaveChanges() > 0)
-                  {
-                      MessageBox.Show(displayText, "USER SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                  }
-            }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+            if (userExistsCount < 1)
             {
-                MessageBox.Show(ex.InnerException.ToString(), "ERROR !", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+
+
+
+                if (emptyText != 1) {
+
+                    try
+                    {
+                         mfu.Users.Add(usr);
+
+                          if (mfu.SaveChanges() > 0)
+                          {
+                              MessageBox.Show(displayText, "USER SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                          }
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+                    {
+                        MessageBox.Show(ex.InnerException.ToString(), "ERROR !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+
+
+            } // testing if user exsists
+            else
+            {
+                MessageBox.Show("User already exsists", "ERROR !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            } //if user exsists i.e the userExsistsCount is 1 or more then display a message
 
 
             if (emptyText == 1)
