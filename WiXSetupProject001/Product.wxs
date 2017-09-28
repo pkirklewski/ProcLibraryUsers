@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"><?define Users_TargetDir=$(var.Users.TargetDir)?>
+	<Product Id="*" Name="WiXSetupProject001" Language="1033" Version="1.0.0.0" Manufacturer="Engie.COM" UpgradeCode="07635f07-7714-45eb-89a4-4d928d9e4c02">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="WiXSetupProject001" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="WiXSetupProject001" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+			<Component Id="EntityFramework.SqlServer.dll" Guid="6f0f2e22-626e-40d7-b5a0-5b3ff7068c73">
+			  <File Id="EntityFramework.SqlServer.dll" Name="EntityFramework.SqlServer.dll" Source="$(var.Users_TargetDir)EntityFramework.SqlServer.dll" />
+			</Component>
+			<Component Id="EntityFramework.dll" Guid="0e1b8f24-4177-407a-8294-7179d61a22ff">
+			  <File Id="EntityFramework.dll" Name="EntityFramework.dll" Source="$(var.Users_TargetDir)EntityFramework.dll" />
+			</Component>
+			<Component Id="Users.exe.config" Guid="0ab2c5da-b586-47b9-a66b-291811b49bd6">
+			  <File Id="Users.exe.config" Name="Users.exe.config" Source="$(var.Users_TargetDir)Users.exe.config" />
+			</Component>
+			<Component Id="Users.exe" Guid="51bd6f09-d70d-485e-8c14-1ce4e033588e">
+			  <File Id="Users.exe" Name="Users.exe" Source="$(var.Users_TargetDir)Users.exe" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

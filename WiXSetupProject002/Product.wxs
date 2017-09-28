@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define Users_TargetDir=$(var.Users.TargetDir)?>
+	<Product Id="*" Name="WiXSetupProject002" Language="1033" Version="1.0.0.0" Manufacturer="Engie.com" UpgradeCode="d04b0f13-19e6-4872-ae1c-96511c7abfe7">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="WiXSetupProject002" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="ProgramFilesFolder_files" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="WiXSetupProject002" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+		</ComponentGroup>
+	</Fragment>
+	<Fragment>
+	  <ComponentGroup Id="ProgramFilesFolder_files" Directory="ProgramFilesFolder">
+	    <Component Id="EntityFramework.SqlServer.dll" Guid="3b5ae48d-93bf-4c86-9ce6-749b64603453">
+	      <File Id="EntityFramework.SqlServer.dll" Name="EntityFramework.SqlServer.dll" Source="$(var.Users_TargetDir)EntityFramework.SqlServer.dll" />
+	    </Component>
+	    <Component Id="EntityFramework.dll" Guid="7569bb05-339c-48a3-98e0-3dd42ebee1cb">
+	      <File Id="EntityFramework.dll" Name="EntityFramework.dll" Source="$(var.Users_TargetDir)EntityFramework.dll" />
+	    </Component>
+	    <Component Id="Users.exe.config" Guid="c7bd472e-24f6-4f4a-affc-766aac104ddc">
+	      <File Id="Users.exe.config" Name="Users.exe.config" Source="$(var.Users_TargetDir)Users.exe.config" />
+	    </Component>
+	    <Component Id="Users.exe" Guid="a2deb353-4e57-4126-9640-ea98660080ae">
+	      <File Id="Users.exe" Name="Users.exe" Source="$(var.Users_TargetDir)Users.exe" />
+	    </Component>
+	  </ComponentGroup>
+	</Fragment>
+</Wix>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define Users_TargetDir=$(var.Users.TargetDir)?>
+	<Product Id="*" Name="WiXSetupProject" Language="1033" Version="1.0.0.0" Manufacturer="Engie.COM" UpgradeCode="57a09906-1f63-4e2f-9dc0-27028d65917d">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="WiXSetupProject" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="ProgramFilesFolder_files" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="WiXSetupProject" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+		</ComponentGroup>
+	</Fragment>
+	<Fragment>
+	  <ComponentGroup Id="ProgramFilesFolder_files" Directory="ProgramFilesFolder">
+	    <Component Id="FacilitiesManagerModel.Context.tt" Guid="5efac39c-9b30-48d4-a109-50b608831f83">
+	      <File Id="FacilitiesManagerModel.Context.tt" Name="FacilitiesManagerModel.Context.tt" Source="$(var.Users_TargetDir)FacilitiesManagerModel.Context.tt" />
+	    </Component>
+	    <Component Id="FacilitiesManagerModel.tt" Guid="2c8813a2-84d5-46c9-9d08-a4ba3b368af5">
+	      <File Id="FacilitiesManagerModel.tt" Name="FacilitiesManagerModel.tt" Source="$(var.Users_TargetDir)FacilitiesManagerModel.tt" />
+	    </Component>
+	    <Component Id="UsersEntityModel.Context.tt" Guid="68f30950-e6bd-4204-9a4b-9abfcd51d8e0">
+	      <File Id="UsersEntityModel.Context.tt" Name="UsersEntityModel.Context.tt" Source="$(var.Users_TargetDir)UsersEntityModel.Context.tt" />
+	    </Component>
+	    <Component Id="UsersEntityModel.tt" Guid="66027aa0-8e71-4ddf-9dda-9df779032ebd">
+	      <File Id="UsersEntityModel.tt" Name="UsersEntityModel.tt" Source="$(var.Users_TargetDir)UsersEntityModel.tt" />
+	    </Component>
+	    <Component Id="Users.exe" Guid="6297e3b0-e358-485b-af6d-43b3f16bad6c">
+	      <File Id="Users.exe" Name="Users.exe" Source="$(var.Users_TargetDir)Users.exe" />
+	    </Component>
+	    <Component Id="Users.exe.config" Guid="505508b9-3d47-467e-972c-fa162b864ff2">
+	      <File Id="Users.exe.config" Name="Users.exe.config" Source="$(var.Users_TargetDir)Users.exe.config" />
+	    </Component>
+	    <Component Id="EntityFramework.dll" Guid="53d6dedc-4ee7-46d3-b85b-3aa1480b39da">
+	      <File Id="EntityFramework.dll" Name="EntityFramework.dll" Source="$(var.Users_TargetDir)EntityFramework.dll" />
+	    </Component>
+	    <Component Id="EntityFramework.SqlServer.dll" Guid="c9e4c535-3880-43c8-b951-7c44a0f2a740">
+	      <File Id="EntityFramework.SqlServer.dll" Name="EntityFramework.SqlServer.dll" Source="$(var.Users_TargetDir)EntityFramework.SqlServer.dll" />
+	    </Component>
+	    <Component Id="Users.pdb" Guid="af31f9c6-b05d-4409-b195-58ff8deb9896">
+	      <File Id="Users.pdb" Name="Users.pdb" Source="$(var.Users_TargetDir)Users.pdb" />
+	    </Component>
+      
+	  </ComponentGroup>
+	</Fragment>
+</Wix>
