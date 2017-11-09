@@ -81,7 +81,8 @@ namespace Users
                 emptyText = 1;
             }
 
-
+            userExsists = from u in mfu.Users where u.FirstName == textBox1.Text && u.LastName == textBox2.Text select u;
+            userExistsCount = userExsists.Count();
 
             if (userExistsCount < 1)
             {
@@ -97,11 +98,14 @@ namespace Users
                           if (mfu.SaveChanges() > 0)
                           {
 
-                            userExsists = from u in mfu.Users where u.FirstName == textBox1.Text || u.LastName == textBox2.Text select u;
-                            userExistsCount = userExsists.Count();
+
                             List<User> myUser001 = userExsists.ToList();
 
-                            var mUser = from x in mfu.Users where x.FirstName == textBox1.Text || x.LastName == textBox1.Text select x.UserId;
+                            var mUser = from x in mfu.Users where x.FirstName == textBox1.Text && x.LastName == textBox2.Text select x.UserId;
+
+                            int aaa = mUser.First();
+
+                            //MessageBox.Show(mUser.First().ToString());
                             
                             //int y = myUserID.First();//Convert.ToInt32(myUserID.ToString());
 
